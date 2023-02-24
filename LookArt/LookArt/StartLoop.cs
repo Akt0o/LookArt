@@ -174,7 +174,17 @@ public class StartLoop {
         {
             Brush brush1 = new SolidColorBrush(Colors.CornflowerBlue);
             actuWindow.UpdateChronoColor(brush1);
-            currentVal = int.Parse(tempPart);
+            try
+            {
+                currentVal = int.Parse(tempPart);
+            }
+            catch
+            {
+                looping = false;
+                actuWindow.GotError("Please define a correct time sequence");
+                currentVal = 0;
+            }
+
         }
         else
         {
