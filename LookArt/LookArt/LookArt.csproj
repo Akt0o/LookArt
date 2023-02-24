@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="img\afuslogo.ico" />
+    <None Remove="img\afuslogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\afuslogo.ico" />
+  </ItemGroup>
+
+</Project>

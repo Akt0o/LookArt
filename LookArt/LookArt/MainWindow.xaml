@@ -1,0 +1,48 @@
+﻿<Window x:Class="LookArt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LookArt"
+        mc:Ignorable="d"
+        Title="LookArt" Height="550" Width="1000" Background="#0f0f0f"
+        MinHeight="550" MinWidth="1000"
+        Icon="img/afuslogo.ico">
+    <Grid>
+
+        <Button x:Name="nextImageButton" Click="btnNext" Margin="0,0,10,10" Style="{StaticResource BaseButton}" FontSize="30" Content="Next Image" HorizontalAlignment="Right" Width="237" Height="67" VerticalAlignment="Bottom" />
+        <StackPanel Background="#1e1e1e" Margin="0,0,500,217" >
+            <Label Foreground="white" FontFamily="Bahnschrift" FontSize="20" Content="Define Absolute Folder Path :" Margin="0,10,0,0"/>
+            <TextBox x:Name="folderTextBox"  Margin="19,0,0,0" Width="323" Height="26" HorizontalAlignment="left" VerticalAlignment="Center"></TextBox>
+            <Label Foreground="white" FontFamily="Bahnschrift" FontSize="20" Content="Define Timestamps (in seconds) :" Margin="0,10,0,0"/>
+            <DockPanel>
+                <TextBox x:Name="sequenceTextBox"  Margin="19,0,0,0" Width="323" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                <Button x:Name="startStopButton" Click="btnStartStopClick" Width="106" Style="{StaticResource BaseButton}">Start</Button>
+            </DockPanel>
+            <Label  Foreground="#c8c8c8" FontFamily="Bahnschrift" FontSize="16" Margin="10,10,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow">Example : <Bold>30,30,60,60</Bold><LineBreak/>  
+                    This will wait 30s for the first image, <LineBreak FontStretch="UltraExpanded"/> 
+                    30 for the next, 60 for the next...<LineBreak/>
+                    To add a pause in the sequence use the letter p, like this :<LineBreak/>
+                    <Bold>30,p10,30,p10</Bold><LineBreak/>
+                    This will wait 30s for the first image, make a pause of 10s before <LineBreak/> the next
+                    image...
+                </TextBlock>
+            </Label>
+        </StackPanel>
+        <Label x:Name="timeCounter" FontFamily="Bahnschrift" Foreground="White" FontSize="80" Margin="0,86,128,322" HorizontalAlignment="Right" Width="214">
+            00:00
+        </Label>
+        <Label x:Name="errorLabel" Foreground="red" FontFamily="Arial" FontSize="20" Margin="36,353,24,82"></Label>
+        <DockPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="277">
+            <Image Source="/img/afuslogo.ico" Stretch="Fill" Width="58" Height="57" Margin="5,5"/>
+            <Label Foreground="white" FontSize="20" Content="Made by Akto" VerticalAlignment="Bottom"/>
+        </DockPanel>
+        <Popup x:Name="imagePopUp" IsOpen="false">
+            <Border BorderThickness="1">
+                <Image x:Name="CurrentImage">
+                </Image>
+            </Border>
+        </Popup>
+    </Grid>
+</Window>
