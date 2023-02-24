@@ -5,8 +5,8 @@
              StartupUri="MainWindow.xaml"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
-        
-        
+
+
         <Style TargetType="Button" x:Key="BaseButton">
             <Setter Property="Foreground" Value="white"/>
             <Setter Property="Background" Value="black"/>

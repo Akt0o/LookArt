@@ -107,6 +107,7 @@ public class StartLoop {
     /// <param name="fPath"></param>
     public void ChangeParam(string strForm, string fPath)
     {
+        loopList.Clear();
         actuWindow.GotError("");
         currentIndex = 0;
         endLoop = true;
