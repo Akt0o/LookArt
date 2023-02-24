@@ -11,7 +11,7 @@ namespace LookArt
     public partial class MainWindow : Window
     {
 
-        public static string AUTHOR = "";
+        public static string AUTHOR = "Akto/COLINDRE";
 
         /// <summary>
         /// main loop class object of the app
