@@ -2,6 +2,7 @@ using LookArt;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -244,32 +245,41 @@ public class StartLoop {
     /// <returns></returns>
     public string GetRdmImage()
     {
-        try
+        if (loopList?.Any() != true)
         {
-            Random rnd = new Random();
-            String[] filesArray = loopList.ToArray();
-            int temp = 0;
-
-            bool findLoop = true;
-            
-            while (findLoop)
-            {
-                temp = rnd.Next(filesArray.Length);
-                if (temp != currentRandom)
-                {
-                    currentRandom = temp;
-                    findLoop = false;
-                }
-            }
-
-            return filesArray[temp];
-
-        }
-        catch
-        {
+            actuWindow.GotError("No image found in the folder");
             looping = false;
-            actuWindow.GotError("error while trying to get an image");
             return "";
+        }
+        else
+        {
+            try
+            {
+                Random rnd = new Random();
+                String[] filesArray = loopList.ToArray();
+                int temp = 0;
+
+                bool findLoop = true;
+
+                while (findLoop)
+                {
+                    temp = rnd.Next(filesArray.Length);
+                    if (temp != currentRandom)
+                    {
+                        currentRandom = temp;
+                        findLoop = false;
+                    }
+                }
+
+                return filesArray[temp];
+
+            }
+            catch
+            {
+                looping = false;
+                actuWindow.GotError("error while trying to get an image");
+                return "";
+            }
         }
     }
 
