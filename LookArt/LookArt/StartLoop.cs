@@ -207,7 +207,6 @@ public class StartLoop {
             if ((_time == TimeSpan.Zero)&(looping))
             {
                 _timer.Stop();
-                actuWindow.UpdateChrono("00:00");
                 if (!isPause)
                 {
                     HideImage();

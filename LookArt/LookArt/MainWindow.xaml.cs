@@ -77,8 +77,8 @@ namespace LookArt
                 }
                 if (mainLoop.Looping & mainLoop.EndLoop)
                 {
-                    mainLoop.Loop();
                     mainLoop.EndLoop = false;
+                    mainLoop.Loop();
                 }
             }
         }
