@@ -2,12 +2,7 @@ using LookArt;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -20,6 +15,7 @@ public class StartLoop {
     /// if true = end of one loop
     /// </summary>
     private bool endLoop = false;
+
 
 	/// <summary>
 	/// 30,p10,30,p10 = [30,p10,30,p10]
@@ -35,6 +31,13 @@ public class StartLoop {
     /// the current index (position) in the time sequence entered by the user
     /// </summary>
     private int currentIndex=0;
+
+
+    /// <summary>
+    /// Integer used to store the last image index, used to avoid the same image of appearing twice
+    /// </summary>
+    private int currentRandom;
+
     /// <summary>
     /// used main window
     /// </summary>
@@ -195,12 +198,12 @@ public class StartLoop {
             currentVal = int.Parse(part);
         }
 
-        _time = TimeSpan.FromSeconds(currentVal);//the principal timer
+        _time = TimeSpan.FromSeconds(currentVal);//the desired time of the timer
 
         _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
         {
             actuWindow.UpdateChrono(_time.ToString(@"mm\:ss"));
-            if (_time == TimeSpan.Zero)
+            if ((_time == TimeSpan.Zero)&(looping))
             {
                 _timer.Stop();
                 actuWindow.UpdateChrono("00:00");
@@ -218,6 +221,7 @@ public class StartLoop {
                 }
                 endLoop = true;//we restart the loop if the timer reach 0 to go unto the next part of the time sequence (and we hide the current image for the next one)
             }
+            _time = _time.Add(TimeSpan.FromSeconds(-1));
             if (!looping)//if looping=false, then the user clicked on stop. Which mean we stop the loop and reset the chrono/close the image
             {
                 _timer.Stop();
@@ -227,14 +231,15 @@ public class StartLoop {
                     HideImage();
                 }
             }
-            _time = _time.Add(TimeSpan.FromSeconds(-1));
-        }, Application.Current.Dispatcher);
+        },
+        Application.Current.Dispatcher);
 
         _timer.Start();
     }
 
     /// <summary>
-    /// get a random index from the folder list loopList and return the full path of the image
+    /// get a random index from the folder list loopList and return the full path of the image.
+    /// To get a different image, we verify that the new random index is not the same as before.
     /// </summary>
     /// <returns></returns>
     public string GetRdmImage()
@@ -243,7 +248,21 @@ public class StartLoop {
         {
             Random rnd = new Random();
             String[] filesArray = loopList.ToArray();
-            return filesArray[rnd.Next(filesArray.Length)];
+            int temp = 0;
+
+            bool findLoop = true;
+            
+            while (findLoop)
+            {
+                temp = rnd.Next(filesArray.Length);
+                if (temp != currentRandom)
+                {
+                    currentRandom = temp;
+                    findLoop = false;
+                }
+            }
+
+            return filesArray[temp];
 
         }
         catch

@@ -36,6 +36,7 @@ namespace LookArt
         LookArt.image popup = new LookArt.image();
 
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -125,12 +126,12 @@ namespace LookArt
                 }
                 else
                 {
-                    InitLoop();
+                    InitLoop(sequenceTextBox.Text, folderTextBox.Text);
                 }
             }
             catch
             {
-                InitLoop();
+                InitLoop(sequenceTextBox.Text, folderTextBox.Text);
             }
 
         }
@@ -151,13 +152,13 @@ namespace LookArt
         /// <summary>
         /// function used to initialize the loop with the parameters entered by the user on the UI
         /// </summary>
-        public void InitLoop()
+        public void InitLoop(string textSeq,string textFold)
         {
-            if (sequenceTextBox.Text.Length == 0)
+            if (textSeq.Length == 0)
             {
                 errorLabel.Content = "Please define the time sequence";
             }
-            else if (folderTextBox.Text.Length == 0)
+            else if (textFold.Length == 0)
             {
                 errorLabel.Content = "Please define the folder path for the images";
             }
@@ -166,11 +167,11 @@ namespace LookArt
                 errorLabel.Content = "";
                 if (mainLoop is null)
                 {
-                    mainLoop = new StartLoop(sequenceTextBox.Text, folderTextBox.Text, this);
+                    mainLoop = new StartLoop(textSeq, textFold, this);
                 }
                 else
                 {
-                    mainLoop.ChangeParam(sequenceTextBox.Text, folderTextBox.Text);
+                    mainLoop.ChangeParam(textSeq, textFold);
                     mainLoop.Looping = true;
                 }
             }
@@ -231,6 +232,29 @@ namespace LookArt
 
 
         /// <summary>
+        /// function called when "Start With Preset" is clicked by the user on the UI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void btnStartPresetClick(object sender, RoutedEventArgs e)
+        {
+            if (((presetTextBox.Text != "") & ((mainLoop is not null) && (!mainLoop.Looping))) ^ ((presetTextBox.Text != "") & (mainLoop is null)))
+            {
+                try
+                {
+                    string seq=System.IO.File.ReadAllText(@presetTextBox.Text);
+                    InitLoop(seq, folderTextBox.Text);
+                }
+                catch 
+                {
+                    errorLabel.Content = "Please define a correct path to the preset file";
+                }
+            }
+        }
+
+
+
+        /// <summary>
         /// override of the "OnClosed" function, used to close the app : the image window was causing it to stay active despite the main window being close
         /// </summary>
         /// <param name="e"></param>
@@ -240,6 +264,7 @@ namespace LookArt
 
             Application.Current.Shutdown();
         }
+
 
     }
 }
