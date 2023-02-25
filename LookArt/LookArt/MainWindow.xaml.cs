@@ -255,7 +255,7 @@ namespace LookArt
 
 
         /// <summary>
-        /// override of the "OnClosed" function, used to close the app : the image window was causing it to stay active despite the main window being close
+        /// override of the "OnClosed" function, used to close the app : the image window was causing it to stay active despite the main window being closed
         /// </summary>
         /// <param name="e"></param>
         protected override void OnClosed(EventArgs e)

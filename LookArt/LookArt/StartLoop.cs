@@ -9,7 +9,7 @@ using System.Windows.Threading;
 
 public class StartLoop {
 	/// <summary>
-	/// if false = end of the loop, the object is deprecated.
+	/// if false = end of the loop.
 	/// </summary>
 	private bool looping = true;
     /// <summary>
@@ -35,7 +35,7 @@ public class StartLoop {
 
 
     /// <summary>
-    /// Integer used to store the last image index, used to avoid the same image of appearing twice
+    /// Integer used to store the last image index, used to avoid the same image appearing twice in a row
     /// </summary>
     private int currentRandom;
 
