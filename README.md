@@ -4,6 +4,8 @@ This software allow you to display a random image taken from a folder you (the u
 
 Show a random image for 30sec then hide it for 30sec and show a new one for 30 sec... Repeat until "stop" is clicked.
 
+You can also create or use "presets" : .txt files containing a time sequence.
+
 # How to install ?
 For windows you can download the zip file LookArtWindowsVer and extract it into a folder.
 
