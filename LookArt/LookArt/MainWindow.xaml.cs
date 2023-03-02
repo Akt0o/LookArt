@@ -225,7 +225,7 @@ namespace LookArt
             {
                 if (popup.Visibility != Visibility.Hidden)
                 {
-                    mainLoop.ShowImage(mainLoop.GetRdmImage());
+                    mainLoop.NxtImg = true;
                 }
             }
         }

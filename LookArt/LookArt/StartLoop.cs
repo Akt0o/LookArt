@@ -17,6 +17,11 @@ public class StartLoop {
     /// </summary>
     private bool endLoop = false;
 
+    /// <summary>
+    /// if true = skip to the next image and time sequence
+    /// </summary>
+    private bool nxtImg = false;
+
 
 	/// <summary>
 	/// 30,p10,30,p10 = [30,p10,30,p10]
@@ -35,9 +40,9 @@ public class StartLoop {
 
 
     /// <summary>
-    /// Integer used to store the last image index, used to avoid the same image appearing twice in a row
+    /// Integer list used to store the latest images index in the same "loop" (currentIndex>0), used to avoid the same image appearing twice in the same loop
     /// </summary>
-    private int currentRandom;
+    private List<int> currentRandom = new List<int>();
 
     /// <summary>
     /// used main window
@@ -161,6 +166,10 @@ public class StartLoop {
     /// main function of the class, is repeated until the user click on "stop".
     /// </summary>
     public void Loop() {
+        if (currentIndex==0)
+        {
+            currentRandom.Clear();
+        }
         bool isPause = false;
         int currentVal;
         string tempPart = "";
@@ -204,6 +213,25 @@ public class StartLoop {
         _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
         {
             actuWindow.UpdateChrono(_time.ToString(@"mm\:ss"));
+
+            if (nxtImg)//If the "skip image" button is clicked, we stop the timer and go onto the next image and time sequence
+            {
+                _timer.Stop();
+                if (!isPause)
+                {
+                    HideImage();
+                }
+                if (currentIndex < loopForm.Length - 1)
+                {
+                    currentIndex += 1;
+                }
+                else
+                {
+                    currentIndex = 0;
+                }
+                endLoop = true;
+                nxtImg = false;
+            }
             if ((_time == TimeSpan.Zero)&(looping))
             {
                 _timer.Stop();
@@ -260,15 +288,24 @@ public class StartLoop {
 
                 bool findLoop = true;
 
+                if (currentRandom.Count >= filesArray.Length)
+                {
+                    currentRandom.Clear();
+                }
+
                 while (findLoop)
                 {
+                    findLoop = false;
                     temp = rnd.Next(filesArray.Length);
-                    if (temp != currentRandom)
+                    foreach (int val in currentRandom)
                     {
-                        currentRandom = temp;
-                        findLoop = false;
+                        if (currentRandom.Contains(temp))
+                        {
+                            findLoop = true;
+                        }
                     }
                 }
+                currentRandom.Add(temp);
 
                 return filesArray[temp];
 
@@ -332,6 +369,21 @@ public class StartLoop {
         } 
         set { 
             endLoop = value; 
+        }
+    }
+
+    /// <summary>
+    /// setter/getter of nxtImg
+    /// </summary>
+    public bool NxtImg
+    {
+        get
+        {
+            return nxtImg;
+        }
+        set
+        {
+            nxtImg = value;
         }
     }
 
