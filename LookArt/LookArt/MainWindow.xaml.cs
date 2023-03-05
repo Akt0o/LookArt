@@ -215,7 +215,7 @@ namespace LookArt
 
 
         /// <summary>
-        /// function called when the user click the "next image" button, change the current image to another random one
+        /// function called when the user click the "next image" button, will stop the current timer to go onto the next one (with a new image)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -297,12 +297,9 @@ public class StartLoop {
                 {
                     findLoop = false;
                     temp = rnd.Next(filesArray.Length);
-                    foreach (int val in currentRandom)
+                    if (currentRandom.Contains(temp))
                     {
-                        if (currentRandom.Contains(temp))
-                        {
-                            findLoop = true;
-                        }
+                        findLoop = true;
                     }
                 }
                 currentRandom.Add(temp);
