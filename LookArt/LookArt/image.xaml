@@ -10,7 +10,9 @@
         Title="image" Width="500" Height="300" 
         MouseDown="Window_MouseDown">
     <Grid Background="Black">
+
         <Image x:Name="ImgSource" Width="auto">
         </Image>
+        <Button Content="X" FontSize="20" Click="CloseImgWin" Foreground="IndianRed" Background="black"  HorizontalAlignment="Right" VerticalAlignment="Top" Width="26" Height="30"/>
     </Grid>
 </Window>

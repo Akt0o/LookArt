@@ -22,3 +22,8 @@ C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\
 C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\App.baml
 C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\image.g.cs
 C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\image.baml
+C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\LookArt.Res.Strings.resources
+C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\LookArt.csproj.GenerateResource.cache
+C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\bin\Debug\net6.0-windows\fr\LookArt.resources.dll
+C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\LookArt.Res.Strings.fr.resources
+C:\Users\user\Documents\GitHub\LookArt\LookArt\LookArt\obj\Debug\net6.0-windows\fr\LookArt.resources.dll

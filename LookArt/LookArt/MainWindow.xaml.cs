@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace LookArt
@@ -69,11 +70,11 @@ namespace LookArt
             {
                 if (mainLoop.Looping)
                 {
-                    startStopButton.Content = "Stop";
+                    startStopButton.Content = Res.Strings.stopButton;
                 }
                 else
                 {
-                    startStopButton.Content = "Start";
+                    startStopButton.Content = Res.Strings.startButton;
                 }
                 if (mainLoop.Looping & mainLoop.EndLoop)
                 {
@@ -143,7 +144,7 @@ namespace LookArt
         public void StopLoop()
         {
             mainLoop.Looping = false;
-            startStopButton.Content = "Start";
+            startStopButton.Content = Res.Strings.startButton;
             Brush brush = new SolidColorBrush(Colors.White);
             UpdateChronoColor(brush);
         }
@@ -156,11 +157,11 @@ namespace LookArt
         {
             if (textSeq.Length == 0)
             {
-                errorLabel.Content = "Please define the time sequence";
+                errContent = Res.Strings.ErrorTimeSeq;
             }
             else if (textFold.Length == 0)
             {
-                errorLabel.Content = "Please define the folder path for the images";
+                errContent = Res.Strings.ErrorFolder;
             }
             else
             {
@@ -204,10 +205,35 @@ namespace LookArt
         /// <param name="err"></param>
         public void GotError(String err)
         {
-            errContent = err;
+            bool known_Error = false;
+            if (err == "NIF")
+            {
+                errContent = Res.Strings.ErrorNoImage;
+                known_Error = true;
+            }
+            if (err == "EGI")
+            {
+                errContent = Res.Strings.ErrorWImage;
+                known_Error = true;
+            }
+            if (err=="DCTS")
+            {
+                errContent = Res.Strings.ErrorCTimeSeq;
+                known_Error = true;
+            }
+            if (err == "DCFP")
+            {
+                errContent = Res.Strings.ErrorFolder;
+                known_Error = true;
+            }
+
             if (mainLoop is not null)
             {
                 mainLoop.Looping = false;
+            }
+            if (!known_Error)
+            {
+                errContent = err;
             }
             Brush brush = new SolidColorBrush(Colors.Red);
             UpdateChronoColor(brush);
@@ -247,7 +273,7 @@ namespace LookArt
                 }
                 catch 
                 {
-                    errorLabel.Content = "Please define a correct path to the preset file";
+                    errContent = Res.Strings.ErrorPreset;
                 }
             }
         }

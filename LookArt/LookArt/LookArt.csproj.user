@@ -12,6 +12,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Res\Strings.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="image.xaml">
       <SubType>Designer</SubType>
     </Page>

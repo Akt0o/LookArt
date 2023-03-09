@@ -39,5 +39,17 @@ namespace LookArt
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        /// <summary>
+        /// Close image window button method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void CloseImgWin(object sender, RoutedEventArgs e)
+        {
+            this.Width = 500;
+            this.Height = 300;
+            this.Visibility = Visibility.Hidden;
+        }
     }
 }

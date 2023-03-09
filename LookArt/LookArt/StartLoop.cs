@@ -78,7 +78,7 @@ public class StartLoop {
                     looping = false;
                     endLoop = false;
                     error = true;
-					actuWindow.GotError("Please enter a correct time sequence, incorrect value : " + part[i]);
+					actuWindow.GotError("Incorrect value : " + part[i]);
 
                 }
 			}
@@ -102,7 +102,7 @@ public class StartLoop {
         }
 		catch (Exception e)
         {
-            actuWindow.GotError("Please define a correct folder path");
+            actuWindow.GotError("DCFP");
             looping = false;
             endLoop = false;
         }
@@ -132,7 +132,7 @@ public class StartLoop {
                 if (!((partChar == 'p') | (partChar == '0') | (partChar == '1') | (partChar == '2') | (partChar == '3') | (partChar == '4') | (partChar == '5') | (partChar == '6') | (partChar == '7') | (partChar == '8') | (partChar == '9')))
                 {
                     error = true;
-                    actuWindow.GotError("Please enter a correct time sequence, incorrect value : " + part[i]);
+                    actuWindow.GotError("Incorrect Value : " + part[i]);
                     looping = false;
                     endLoop = false;
                 }
@@ -156,7 +156,7 @@ public class StartLoop {
         }
         catch (Exception e)
         {
-            actuWindow.GotError("Please define a correct folder path");
+            actuWindow.GotError("DCFP");
             looping = false;
             endLoop = false;
         }
@@ -195,7 +195,7 @@ public class StartLoop {
             catch
             {
                 looping = false;
-                actuWindow.GotError("Please define a correct time sequence");
+                actuWindow.GotError("DCTS");
                 currentVal = 0;
             }
 
@@ -274,7 +274,7 @@ public class StartLoop {
     {
         if (loopList?.Any() != true)
         {
-            actuWindow.GotError("No image found in the folder");
+            actuWindow.GotError("NIF");
             looping = false;
             return "";
         }
@@ -310,7 +310,7 @@ public class StartLoop {
             catch
             {
                 looping = false;
-                actuWindow.GotError("error while trying to get an image");
+                actuWindow.GotError("EGI");
                 return "";
             }
         }

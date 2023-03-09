@@ -9,6 +9,11 @@
       "LookArt/1.0.0": {
         "runtime": {
           "LookArt.dll": {}
+        },
+        "resources": {
+          "fr/LookArt.resources.dll": {
+            "locale": "fr"
+          }
         }
       }
     }
