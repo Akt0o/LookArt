@@ -26,7 +26,7 @@ public class StartLoop {
 	/// <summary>
 	/// 30,p10,30,p10 = [30,p10,30,p10]
 	/// </summary>
-	private string[] loopForm;
+	private List<string> loopForm=new List<string>();
 
     /// <summary>
     /// the folderpath entered by the user
@@ -58,9 +58,9 @@ public class StartLoop {
     /// constructor of this class, verify if the data entered by the user is valid and if not send the error.
     /// It also initialize the loop
     /// </summary>
-    /// <param name="strForm"></param>
-    /// <param name="fPath"></param>
-    /// <param name="mWindow"></param>
+    /// <param name="strForm">the time sequence raw string given by the user</param>
+    /// <param name="fPath">the folder path given by the user</param>
+    /// <param name="mWindow">The main window</param>
 	public StartLoop(string strForm, string fPath, MainWindow mWindow) {
         this.actuWindow = mWindow;
         this.folderPath = fPath;
@@ -73,7 +73,7 @@ public class StartLoop {
 			{
 				char partChar = part[i];
 
-                if (!((partChar == 'p') | (partChar == '0') | (partChar == '1') | (partChar == '2') | (partChar == '3') | (partChar == '4') | (partChar == '5') | (partChar == '6') | (partChar == '7') | (partChar == '8') | (partChar == '9')))
+                if (!((partChar=='x') | (partChar == 'p') | (partChar == '0') | (partChar == '1') | (partChar == '2') | (partChar == '3') | (partChar == '4') | (partChar == '5') | (partChar == '6') | (partChar == '7') | (partChar == '8') | (partChar == '9')))
                 {
                     looping = false;
                     endLoop = false;
@@ -85,7 +85,7 @@ public class StartLoop {
 		}
 		if (!error)//If the content of the string array of the sequence is valid, we assign it to loopForm and continue
 		{
-			loopForm = temp;
+            loopForm = temp.ToList(); ;
 		}
 		try//Folder content part, we get the path of every image of the folder and add it to the list (private attribute) for later
 		{
@@ -112,10 +112,11 @@ public class StartLoop {
     /// looks a lot like the constructor, the goal is to re-initialize the attributes with the new data inputed by the user and verify them.
     /// Also re-initialize the loop
     /// </summary>
-    /// <param name="strForm"></param>
-    /// <param name="fPath"></param>
+    /// <param name="strForm">the time sequence raw string given by the user</param>
+    /// <param name="fPath">the folder path given by the user</param>
     public void ChangeParam(string strForm, string fPath)
     {
+        loopForm.Clear();
         loopList.Clear();
         actuWindow.GotError("");
         currentIndex = 0;
@@ -129,7 +130,7 @@ public class StartLoop {
             {
                 char partChar = part[i];
 
-                if (!((partChar == 'p') | (partChar == '0') | (partChar == '1') | (partChar == '2') | (partChar == '3') | (partChar == '4') | (partChar == '5') | (partChar == '6') | (partChar == '7') | (partChar == '8') | (partChar == '9')))
+                if (!((partChar=='x') | (partChar == 'p') | (partChar == '0') | (partChar == '1') | (partChar == '2') | (partChar == '3') | (partChar == '4') | (partChar == '5') | (partChar == '6') | (partChar == '7') | (partChar == '8') | (partChar == '9')))
                 {
                     error = true;
                     actuWindow.GotError("Incorrect Value : " + part[i]);
@@ -140,7 +141,7 @@ public class StartLoop {
         }
         if (!error)//If the content of the string array of the sequence is valid, we assign it to loopForm and continue
         {
-            loopForm = temp;
+            loopForm = temp.ToList();
         }
         try//Folder content part, we get the path of every image of the folder and add it to the list (private attribute) for later
         {
@@ -184,13 +185,14 @@ public class StartLoop {
                 tempPart = part.Substring(i + 1);
             }
         }
+                
         if (isPause)// depending on the type of timestamp (pause or image) we change the color of the time counter/show an image
         {
             Brush brush1 = new SolidColorBrush(Colors.CornflowerBlue);
             actuWindow.UpdateChronoColor(brush1);
             try
             {
-                currentVal = int.Parse(tempPart);
+                currentVal=TryMultiply(tempPart, isPause);
             }
             catch
             {
@@ -205,7 +207,7 @@ public class StartLoop {
             ShowImage(GetRdmImage());
             Brush brush2 = new SolidColorBrush(Colors.IndianRed);
             actuWindow.UpdateChronoColor(brush2);
-            currentVal = int.Parse(part);
+            currentVal = TryMultiply(part,isPause);
         }
 
         _time = TimeSpan.FromSeconds(currentVal);//the desired time of the timer
@@ -221,7 +223,7 @@ public class StartLoop {
                 {
                     HideImage();
                 }
-                if (currentIndex < loopForm.Length - 1)
+                if (currentIndex < loopForm.Count - 1)
                 {
                     currentIndex += 1;
                 }
@@ -239,7 +241,7 @@ public class StartLoop {
                 {
                     HideImage();
                 }
-                if (currentIndex < loopForm.Length - 1)
+                if (currentIndex < loopForm.Count - 1)
                 {
                     currentIndex += 1;
                 }
@@ -264,6 +266,76 @@ public class StartLoop {
 
         _timer.Start();
     }
+
+
+    /// <summary>
+    /// Function multiply, check if val contains an 'x' which symbolize a repeatition of a part of the sequence, example :
+    /// 2x3 = 3,3
+    /// which means that the image will show during 3seconds and then go onto another image for 3seconds.
+    /// </summary>
+    /// <param name="val">string value of the current part of the time sequence</param>
+    /// <returns>Return (a string) the first value deducted from the part. If there is no x then it will return val. If there is an x, it will return the first value of the repeatition.</returns>
+    public int TryMultiply(string val, bool isPause)//Commentaire à compléter
+    {
+        List<string> values = new List<string>();
+        if (val.Contains('x')){
+            values = val.Split('x').ToList();
+        }
+        if (values.Count<2)//if there is no 'x' in the sequence part (val) :
+        {
+            try//We simply try to return the original value
+            {
+                return Convert.ToInt32(val);
+            }
+            catch
+            {
+                actuWindow.GotError("DCTS");
+                return 0;
+            }
+        }
+        else 
+        {
+            if (values.Count > 2)//we check if there is more than two values in the repeatition (not allowed).
+            {
+                actuWindow.GotError("DCTS");
+                return 0;
+            }
+
+            try //If there is exactly two values, we try to replace the "equation" (val) by the result of the repeatition
+            {
+                int tempIndex = currentIndex;//We make sure to add the values of the repeatition on the correct index
+                for (int u = 1; u<= Convert.ToInt32(values.First()); u++)//values.First = Val1 in Val1xVal2   (the val parameter)
+                {
+                    if (isPause)//Here we add in the loopForm (the repeated sequence) the result of the repeatition. Example : for a sequence of : 3x2,10. we will get a loopForm looking like this : (2,2,2,10). Since we repeated 3 time 2.
+                    {
+                        loopForm.Insert(tempIndex, ("p" + values.Last()));//If it's a pause we simply add the "p" before the value
+                    }
+                    else
+                    {
+                        loopForm.Insert(tempIndex, values.Last());
+                    }
+                    tempIndex++;
+                }
+
+                if (isPause)//We delete the original repeatition (Val1xVal2)
+                {
+                    loopForm.Remove("p" + val);//Adding "p" if the original repeatition was a pause
+                }
+                else
+                {
+                    loopForm.Remove(val);
+                }
+
+                return Convert.ToInt32(values.Last());//We return the value repeated
+            }
+            catch
+            {
+                actuWindow.GotError("DCTS");
+                return 0;
+            }
+        }
+    }
+
 
     /// <summary>
     /// get a random index from the folder list loopList and return the full path of the image.

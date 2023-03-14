@@ -141,7 +141,10 @@ Ceci attendra 30s pour la première image,
 60 pour la prochaine et cela bouclera jusqu'à ce que "stop" soit cliqué...
 Pour ajouter une pause dans la séquence, utilisez la lettre p :
  30,p10
-Ceci affichera une image pendant 30sec, puis fera une pause de 10sec et passera à l'image suivante...</value>
+Ceci affichera une image pendant 30sec, puis fera une pause de 10sec et passera à l'image suivante...
+Vous pouvez aussi utiliser une répétition, comme ceci :
+3x30,p10  
+Cela donnera : 30,30,30,p10</value>
   </data>
   <data name="LabelFolder" xml:space="preserve">
     <value>Definir le chemin absolu du dossier :</value>

@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:LookArt"
         xmlns:Res="clr-namespace:LookArt.Res"
         mc:Ignorable="d"
-        Title="LookArt v1.03" Height="550" Width="1000" Background="#0f0f0f"
+        Title="LookArt v1.04" Height="583" Width="1000" Background="#0f0f0f"
         MinHeight="550" MinWidth="1000"
         Icon="img/afuslogo.ico">
     <Grid>
 
         <Button x:Name="nextImageButton" Click="btnNext" Margin="0,0,10,10" Style="{StaticResource BaseButton}" FontSize="30" Content="{x:Static Res:Strings.NextButton}" HorizontalAlignment="Right" Width="237" Height="67" VerticalAlignment="Bottom" />
-        <StackPanel Background="#1e1e1e" Margin="0,0,500,186" >
+        <StackPanel Background="#1e1e1e" Margin="0,0,500,162" >
             <Label Foreground="white" FontFamily="Bahnschrift" FontSize="20" Content="{x:Static Res:Strings.LabelFolder}" Margin="0,10,0,0"/>
             <TextBox x:Name="folderTextBox"  Margin="19,0,0,0" Width="323" Height="26" HorizontalAlignment="left" VerticalAlignment="Center"></TextBox>
             <Label Foreground="white" FontFamily="Bahnschrift" FontSize="20" Content="{x:Static Res:Strings.LabelTimerSeq}" Margin="0,10,0,0"/>
@@ -21,21 +21,21 @@
                 <Button x:Name="startStopButton" Click="btnStartStopClick" Width="106" Style="{StaticResource BaseButton}" Content="{x:Static Res:Strings.startButton}" />
             </DockPanel>
             <Label  Foreground="#c8c8c8" FontFamily="Bahnschrift" FontSize="16" Margin="10,10,0,0">
-                <TextBlock TextWrapping="WrapWithOverflow" Text="{x:Static Res:Strings.Example}"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{x:Static Res:Strings.Example}" Height="217"/>
             </Label>
         </StackPanel>
         <Label x:Name="timeCounter" FontFamily="Bahnschrift" Foreground="White" FontSize="80" Margin="0,86,128,322" HorizontalAlignment="Right" Width="214">
             00:00
         </Label>
 
-        <StackPanel Margin="0,0,0,186" Background="#1e1e1e" HorizontalAlignment="Right" Width="500" Height="117" VerticalAlignment="Bottom">
+        <StackPanel Margin="0,0,0,162" Background="#1e1e1e" HorizontalAlignment="Right" Width="500" Height="95" VerticalAlignment="Bottom">
             <Label HorizontalAlignment="left" Foreground="white" FontFamily="Bahnschrift" FontSize="20" Content="{x:Static Res:Strings.LabelPreset}" Margin="15,0,0,0" Padding="5"/>
             <DockPanel>
                 <TextBox x:Name="presetTextBox"  Margin="20,5,5,0" Width="323" Height="26" HorizontalAlignment="left" VerticalAlignment="Center"></TextBox>
                 <Button x:Name="startButtonPreset" Margin="0,0,5,0"  Click="btnStartPresetClick" Width="auto" Style="{StaticResource BaseButton}" Content="{x:Static Res:Strings.presetButton}"/>
             </DockPanel>
         </StackPanel>
-        <Label x:Name="errorLabel" Foreground="red" FontFamily="Arial" FontSize="20" Margin="36,353,24,82"></Label>
+        <Label x:Name="errorLabel" Foreground="red" FontFamily="Arial" FontSize="20" Margin="50,425,10,10"></Label>
         <DockPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="366">
             <Image Source="/img/afuslogo.ico" Stretch="Fill" Width="58" Height="57" Margin="5,5"/>
             <Label Foreground="white" FontSize="20" Content="Made by Akto (Akt0o on github)" VerticalAlignment="Bottom"/>

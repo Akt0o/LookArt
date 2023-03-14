@@ -121,7 +121,10 @@ namespace LookArt.Res {
         ///To add a pause in the sequence use the letter p, like this :
         /// 30,p10
         ///This will wait 30s for the first image, make a pause of 10s before
-        ///the next image....
+        ///the next image...
+        ///You can also use repeatition, like this :
+        ///3x30,p10  
+        ///This will do : 30,30,30,p10.
         /// </summary>
         public static string Example {
             get {
