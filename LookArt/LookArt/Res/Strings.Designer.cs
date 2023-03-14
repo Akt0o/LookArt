@@ -123,8 +123,8 @@ namespace LookArt.Res {
         ///This will wait 30s for the first image, make a pause of 10s before
         ///the next image...
         ///You can also use repeatition, like this :
-        ///3x30,p10  
-        ///This will do : 30,30,30,p10.
+        ///3x30,p10,p2x20
+        ///This will do : 30,30,30,p10,p20,p20.
         /// </summary>
         public static string Example {
             get {

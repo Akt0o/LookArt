@@ -143,8 +143,8 @@ Pour ajouter une pause dans la séquence, utilisez la lettre p :
  30,p10
 Ceci affichera une image pendant 30sec, puis fera une pause de 10sec et passera à l'image suivante...
 Vous pouvez aussi utiliser une répétition, comme ceci :
-3x30,p10  
-Cela donnera : 30,30,30,p10</value>
+3x30,p10,p2x20
+Cela donnera : 30,30,30,p10,p20,p20</value>
   </data>
   <data name="LabelFolder" xml:space="preserve">
     <value>Definir le chemin absolu du dossier :</value>

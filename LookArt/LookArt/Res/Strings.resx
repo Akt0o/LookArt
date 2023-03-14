@@ -144,8 +144,8 @@ To add a pause in the sequence use the letter p, like this :
 This will wait 30s for the first image, make a pause of 10s before
 the next image...
 You can also use repeatition, like this :
-3x30,p10  
-This will do : 30,30,30,p10</value>
+3x30,p10,p2x20
+This will do : 30,30,30,p10,p20,p20</value>
   </data>
   <data name="LabelFolder" xml:space="preserve">
     <value>Define Absolute Folder Path :</value>
